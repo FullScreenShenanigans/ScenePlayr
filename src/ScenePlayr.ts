@@ -38,11 +38,6 @@ export class ScenePlayr implements IScenePlayr {
     private cutsceneArguments: any[];
 
     /**
-     * The scope routines are run in, if not this.
-     */
-    private scope: any;
-
-    /**
      * Initializes a new instance of the ScenePlayr class.
      * 
      * @param settings   Settings to be used for initialization.
@@ -50,7 +45,6 @@ export class ScenePlayr implements IScenePlayr {
     public constructor(settings: IScenePlayrSettings = {}) {
         this.cutscenes = settings.cutscenes || {};
         this.cutsceneArguments = settings.cutsceneArguments || [];
-        this.scope = settings.scope || this;
     }
 
     /**
@@ -92,13 +86,6 @@ export class ScenePlayr implements IScenePlayr {
         }
 
         return this.cutscene.routines[name];
-    }
-
-    /**
-     * @returns The scope routines are run in, if not this.
-     */
-    public getRoutineScope(): any {
-        return this.scope;
     }
 
     /**
@@ -204,7 +191,7 @@ export class ScenePlayr implements IScenePlayr {
         this.cutsceneSettings.routineName = name;
         this.cutsceneSettings.routineArguments = args;
 
-        this.routine.apply(this.scope, routineArgs);
+        this.routine.apply(this.cutscene.scope || this.cutscene.routines, routineArgs);
     }
 
     /**

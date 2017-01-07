@@ -10,14 +10,19 @@ export interface ICutscenes {
  */
 export interface ICutscene {
     /**
+     * An optional routine name to play immediately upon starting the cutscene.
+     */
+    firstRoutine?: string;
+
+    /**
      * The routines available to the cutscene, keyed by name.
      */
     routines: IRoutines;
 
     /**
-     * An optional routine name to play immediately upon starting the cutscene.
+     * Scope to call the routines from, if not the routines object.
      */
-    firstRoutine?: string;
+    scope?: any;
 }
 
 /**
@@ -87,11 +92,6 @@ export interface IScenePlayrSettings {
      * Arguments to pass to each routine within the cutscenes.
      */
     cutsceneArguments?: any[];
-
-    /**
-     * The scope routines are run in, if not this IScenePlayr.
-     */
-    scope?: any;
 }
 
 /**
@@ -124,11 +124,6 @@ export interface IScenePlayr {
      *          by the given name.
      */
     getOtherRoutine(name: string): IRoutine | undefined;
-
-    /**
-     * @returns The scope routines are run in, if not this.
-     */
-    getRoutineScope(): any;
 
     /**
      * @returns The name of the currently playing cutscene.

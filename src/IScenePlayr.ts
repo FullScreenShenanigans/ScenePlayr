@@ -149,8 +149,8 @@ export interface IScenePlayr {
      * cutscene specifies a firstRoutine, it's started.
      * 
      * @param name   The name of the cutscene to play.
-     * @param [settings]   Additional settings to be kept persistently 
-     *                     throughout the cutscene.
+     * @param settings   Settings to be kept persistently throughout the cutscene.
+     * @param args   Any arguments to pass to a first routine.
      */
     startCutscene(name: string, settings?: any): void;
 
@@ -158,8 +158,8 @@ export interface IScenePlayr {
      * Returns this.startCutscene bound to the given name and settings.
      * 
      * @param name   The name of the cutscene to play.
-     * @param args   Additional settings to be kept as a persistent 
-     *               Array throughout the cutscene.
+     * @param settings   Settings to be kept as persistently throughout the cutscene.
+     * @param args   Any arguments to pass to a first routine.
      */
     bindCutscene(name: string, settings?: any): () => void;
 

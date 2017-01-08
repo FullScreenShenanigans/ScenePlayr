@@ -118,10 +118,10 @@ export class ScenePlayr implements IScenePlayr {
      * cutscene specifies a firstRoutine, it's started.
      * 
      * @param name   The name of the cutscene to play.
-     * @param settings   Additional settings to be kept persistently 
-     *                     throughout the cutscene.
+     * @param settings   Settings to be kept persistently throughout the cutscene.
+     * @param args   Any arguments to pass to a first routine.
      */
-    public startCutscene(name: string, settings: IPartialCutsceneSettings = {}, args?: any): void {
+    public startCutscene(name: string, settings: IPartialCutsceneSettings = {}, ...args: any[]): void {
         if (!name) {
             throw new Error("No name given to ScenePlayr.playScene.");
         }
@@ -146,12 +146,11 @@ export class ScenePlayr implements IScenePlayr {
      * Returns this.startCutscene bound to the given name and settings.
      * 
      * @param name   The name of the cutscene to play.
-     * @param settings   Additional settings to be kept as a persistent Object
-     *                   throughout the cutscene.
-     * @param args   Arguments for the firstRoutine, if it exists.
+     * @param settings   Settings to be kept as persistently throughout the cutscene.
+     * @param args   Any arguments to pass to a first routine.
      */
-    public bindCutscene(name: string, settings: any = {}, args?: any): () => void {
-        return (): void => this.startCutscene(name, settings, args);
+    public bindCutscene(name: string, settings: any = {}, ...args: any[]): () => void {
+        return (): void => this.startCutscene(name, settings, ...args);
     }
 
     /**
